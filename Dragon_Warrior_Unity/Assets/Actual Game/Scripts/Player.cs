@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
         {
             onGround = true;
         }
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
     {
         canRoll = false;
         isRolling = true;
-        anim.SetBool("is_roll", true);
+        anim.SetBool(Roll_Anim, true);
         if (!sr.flipX)
         {
             myBody.velocity = new Vector2(transform.localScale.x * rollForce, 0f);
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
         }
         yield return new WaitForSeconds(rollingTime);
         myBody.velocity = new Vector2(0f, 0f);
-        anim.SetBool("is_roll", false);
+        anim.SetBool(Roll_Anim, false);
         isRolling = false;
         yield return new WaitForSeconds(rollCooldown);
         canRoll = true;
