@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("die");
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Enemy_Patrol>().enabled = false;
         this.enabled = false;
     }
 }

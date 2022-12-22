@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Jobs;
@@ -12,10 +13,12 @@ public class Player : MonoBehaviour
     private float jumpForce = 10f;
     [SerializeField]
     private float rollForce = 15f;
+
+    private bool facingRight = true;
+
     // Start is called before the first frame update
 
     private Animator anim;
-    private SpriteRenderer sr;
     private Rigidbody2D myBody;
 
     //animator parameter
@@ -37,12 +40,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
         myBody = GetComponent<Rigidbody2D>();
     }
     void Start()
     {
-        
+    
     }
 
     // Update is called once per frame
@@ -95,12 +97,20 @@ public class Player : MonoBehaviour
         {
             // move right
             anim.SetBool(Run_Anim, true);
-            sr.flipX = false;
+            if (!facingRight)
+            {
+                facingRight = true;
+                transform.Rotate(new Vector3(0f, 180f, 0f));
+            }
         }else if (movementX < 0)
         {
             // move left
             anim.SetBool(Run_Anim, true);
-            sr.flipX = true;
+            if (facingRight)
+            {
+                facingRight = false;
+                transform.Rotate(new Vector3(0f, 180f, 0f));
+            }
         }
         else
         {
@@ -144,7 +154,7 @@ public class Player : MonoBehaviour
         canRoll = false;
         isRolling = true;
         anim.SetBool(Roll_Anim, true);
-        if (!sr.flipX)
+        if (facingRight)
         {
             myBody.velocity = new Vector2(transform.localScale.x * rollForce, 0f);
         }
@@ -158,7 +168,6 @@ public class Player : MonoBehaviour
         isRolling = false;
         yield return new WaitForSeconds(rollCooldown);
         canRoll = true;
-
     }
 
 }

@@ -13,7 +13,11 @@ public class Player_Sword_Attack : MonoBehaviour
     [SerializeField]
     private LayerMask enemyLayers;
     [SerializeField]
-    private int playDamage = 20;
+    private int playerDamage = 20;
+    //set up the attackRate
+    [SerializeField]
+    private float attackRate = 2f;
+    private float nextAttackTime = 0f;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,16 +31,26 @@ public class Player_Sword_Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) {
-            Attack1();
-        }
-        if (Input.GetKeyDown(KeyCode.K))
+        if(Time.time >= nextAttackTime)
         {
-            Attack2();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Attack3();
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Attack1();
+                attackRate = 2f;
+                nextAttackTime = Time.time + 1/attackRate;
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Attack2();
+                attackRate = 3f;
+                nextAttackTime = Time.time + 1 / attackRate;
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Attack3();
+                attackRate = 1f;
+                nextAttackTime = Time.time + 1 / attackRate;
+            }
         }
     }
 
@@ -49,18 +63,38 @@ public class Player_Sword_Attack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         //Damage them
-        foreach(Collider2D enemy in hitEnemies)
+        playerDamage = 20;
+        foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(playDamage);
+            enemy.GetComponent<Enemy>().TakeDamage(playerDamage);
         }
     }
     void Attack2()
     {
         animator.SetTrigger("attack2");
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        //Damage them
+        playerDamage = 10;
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(playerDamage);
+        }
+
     }
     void Attack3()
     {
         animator.SetTrigger("attack3");
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        //Damage them
+        playerDamage = 30;
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(playerDamage);
+        }
     }
 
     private void OnDrawGizmosSelected()
