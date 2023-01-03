@@ -7,37 +7,47 @@ public class Enemy_Patrol : MonoBehaviour
 
     Rigidbody2D rb;
     private Animator animator;
-    float moveSpeed = 2.0f;
+    public float patrolSpeed = 2.0f;
     public bool is_Patrol = true;
-    private bool facingRight = true;
+    public bool facingRight = true;
     //private Vector3 baseScale;
     [SerializeField]
     private Transform castTrans;
     [SerializeField]
     private float baseCastDist;
-
+    private bool is_chasing;
     // Start is called before the first frame update
     void Start()
     {
         //baseScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        is_chasing = GetComponent<Enemy_Chase>().is_chasing;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void FixedUpdate()
     {
+        // detect whether the enemy spotted the player and try to chase the player
+        if (is_chasing)
+        {
+            is_Patrol = false;
+        }
+        else
+        {
+            is_Patrol = true;
+        }
+
         if (is_Patrol)
         {
-            float vX = moveSpeed;
+            float vX = patrolSpeed;
             if (!facingRight)
             {
-                vX = -moveSpeed;
+                vX = -patrolSpeed;
             }
             rb.velocity = new Vector2(vX, rb.velocity.y);
             animator.SetBool("is_patrol", true);
@@ -45,6 +55,10 @@ public class Enemy_Patrol : MonoBehaviour
             {
                 ChangeFacingDirection();
             }
+        }
+        else
+        {
+            animator.SetBool("is_patrol", false);
         }
     }
     
@@ -79,6 +93,12 @@ public class Enemy_Patrol : MonoBehaviour
             hit = true;
         }
         return hit;
+    }
+
+    public void detect_chasing(bool is_chasing, bool facingRight)
+    {
+        this.is_chasing = is_chasing;
+        this.facingRight = facingRight;
     }
 
     void ChangeFacingDirection()
