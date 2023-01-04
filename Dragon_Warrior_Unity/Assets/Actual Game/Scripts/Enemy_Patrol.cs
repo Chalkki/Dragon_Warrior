@@ -28,10 +28,16 @@ public class Enemy_Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void FixedUpdate()
     {
+        if (GetComponent<Enemy>().isAttacking)
+        {
+            return;
+        }
+        
         // detect whether the enemy spotted the player and try to chase the player
         if (is_chasing)
         {
@@ -83,7 +89,8 @@ public class Enemy_Patrol : MonoBehaviour
 
         // Check if hitting edge
         targetPos = castTrans.position;
-        targetPos.y -= baseCastDist;
+        // let the enemy to patrol deeper in height
+        targetPos.y = targetPos.y - baseCastDist;
         if (Physics2D.Linecast(castTrans.position, targetPos, 1 << LayerMask.NameToLayer("Terrain")))
         {
             hit = false;

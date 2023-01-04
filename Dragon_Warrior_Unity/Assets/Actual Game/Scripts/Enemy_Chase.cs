@@ -12,8 +12,12 @@ public class Enemy_Chase : MonoBehaviour
     public bool is_chasing = false;
     // The look range for the enemy
     public float lookRadius = 5f;
+    // The escape radius when player is outside of the enemy's spot
+    public float escapeRadius = 10f;
     // the center point of model of the enemy
     public Transform sprite_center_point;
+    // whether the enemy can fly or not
+    public bool canFly = false;
     bool being_attacked;
     // Start is called before the first frame update
     private Animator animator;
@@ -33,8 +37,19 @@ public class Enemy_Chase : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GetComponent<Enemy>().isAttacking)
+        {
+            return;
+        }
         float distance = Vector2.Distance(player.transform.position, transform.position);
         float x_direction = Mathf.Sign(player.transform.position.x - transform.position.x);
+        float x_distance = Mathf.Abs(player.transform.position.x - transform.position.x);
+        if (!canFly && player.GetComponent<Player>().isClimbing && x_distance < 0.1)
+        {
+            rb.velocity = new Vector2(0f, 0f);
+            animator.SetBool("is_chasing", false);
+            return;
+        }
         if (distance <= lookRadius)
         {
             if (facingRight && x_direction == 1)
@@ -51,7 +66,8 @@ public class Enemy_Chase : MonoBehaviour
                 being_attacked = false;
             }
         }
-        else
+        // if the player is out of the escape radius, then stop chasing
+        if (distance > escapeRadius)
         {
             is_chasing = false;
             animator.SetBool("is_chasing", false);
@@ -67,9 +83,10 @@ public class Enemy_Chase : MonoBehaviour
             {
                 ChangeFacingDirection();
             }
-            float vX = x_direction * chaseSpeed;
+/*            float vX = x_direction * chaseSpeed;
             float vY = rb.velocity.y;
-            rb.velocity = new Vector2(vX, vY);
+            rb.velocity = new Vector2(vX, vY);*/
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
         }
         GetComponent<Enemy_Patrol>().detect_chasing(is_chasing, facingRight);
     }
@@ -94,5 +111,6 @@ public class Enemy_Chase : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(sprite_center_point.position, lookRadius);
+        Gizmos.DrawWireSphere(sprite_center_point.position, escapeRadius);
     }
 }

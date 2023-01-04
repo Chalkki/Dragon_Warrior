@@ -7,11 +7,23 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     private Animator animator;
     int currentHealth;
+    public bool canFly = false;
+    GameObject player;
+    Rigidbody2D rb;
+    public float attackRange ;
+    private float nextAttackTime = 0f;
+    private float attackRate = 1f;
+    public bool isAttacking = false;
+    public float attackDamage;
+    [SerializeField] LayerMask playerLayer;
+    [SerializeField] Transform attackPoint;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         animator= GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -20,8 +32,38 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        float distance = Vector2.Distance(player.transform.position, attackPoint.position);
+/*        if (!canFly)
+        {
+            // if the player is on the ladder 
+            bool isLadder = player.GetComponent<Player>().isLadder;
+            if (isLadder)
+            {
+                return;
+            }
+
+        }*/
+        if (distance <= attackRange && Time.time >= nextAttackTime) {
+            isAttacking = true;
+            animator.SetTrigger("attacking");
+            rb.velocity = new Vector2(0f, 0f);
+            nextAttackTime = Time.time + 1/attackRate;
+        }
+    }
+
+    public void finishattacking()
+    {
+        isAttacking = false;
+    }
     public void TakeDamage(int damage)
     {
+        // return if the current object is already dead
+        if (currentHealth <= 0)
+        {
+            return;
+        }
         currentHealth -= damage;
         GetComponent<Enemy_Chase>().Being_attacked();
         if (currentHealth <= 0)
@@ -32,7 +74,16 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-
+        // return if the current object is already dead
+        if(currentHealth <= 0) 
+        {
+            return;
+        }
+        Collider2D []hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        foreach (Collider2D player_ in hitPlayer)
+        {
+            player_.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+        }
     }
     void Die()
     {
@@ -43,6 +94,20 @@ public class Enemy : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Enemy_Patrol>().enabled = false;
         GetComponent<Enemy_Chase>().enabled = false;
-        this.enabled = false;
+        GetComponent<Enemy>().enabled = false;
+        StartCoroutine(waitToDestory());
+        //this.enabled = false;
+    }
+
+    IEnumerator waitToDestory()
+    {
+        // wait for five seconds before destorying the object
+        yield return new WaitForSeconds(5);
+        // destory the object
+        Destroy(gameObject);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
