@@ -35,19 +35,25 @@ public class Player_Sword_Attack : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                Attack1();
+                // Play the attack animation
+                animator.SetTrigger("attack1");
+                // there is an attack event inside the animation, as the attack animation to a good position, the attack1 function would be triggered.
                 attackRate = 2f;
                 nextAttackTime = Time.time + 1/attackRate;
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Attack2();
+                // Play the attack animation
+                animator.SetTrigger("attack2");
+                // there is an attack event inside the animation, as the attack animation to a good position, the attack1 function would be triggered.
                 attackRate = 3f;
                 nextAttackTime = Time.time + 1 / attackRate;
             }
             if (Input.GetKeyDown(KeyCode.L))
             {
-                Attack3();
+                // Play the attack animation
+                animator.SetTrigger("attack3");
+                // there is an attack event inside the animation, as the attack animation to a good position, the attack1 function would be triggered.
                 attackRate = 1f;
                 nextAttackTime = Time.time + 1 / attackRate;
             }
@@ -56,8 +62,6 @@ public class Player_Sword_Attack : MonoBehaviour
 
     void Attack1()
     {
-        // Play an attack animation
-        animator.SetTrigger("attack1");
 
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -71,7 +75,6 @@ public class Player_Sword_Attack : MonoBehaviour
     }
     void Attack2()
     {
-        animator.SetTrigger("attack2");
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
@@ -85,7 +88,6 @@ public class Player_Sword_Attack : MonoBehaviour
     }
     void Attack3()
     {
-        animator.SetTrigger("attack3");
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 

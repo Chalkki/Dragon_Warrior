@@ -33,8 +33,8 @@ public class Player : MonoBehaviour
     // paremeters for jumping
     private bool onGround = true;
     // parameters for climbing
-    private bool isLadder = false;
-    private bool isClimbing = false;
+    public bool isLadder = false;
+    public bool isClimbing = false;
     private float vertical = 0f;
     private float climbSpeed = 5f;
     private void Awake()
