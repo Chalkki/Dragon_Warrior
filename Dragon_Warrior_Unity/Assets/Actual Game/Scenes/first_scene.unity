@@ -1781,7 +1781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -383.93045, y: 208.9087}
+  m_AnchoredPosition: {x: -164, y: 146}
   m_SizeDelta: {x: 280, y: 51.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2056152027
@@ -1986,6 +1986,10 @@ PrefabInstance:
     - target: {fileID: 1635484815045275650, guid: c79c792eb07d0844cbf6501d8ca8e0ed, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635484815045275655, guid: c79c792eb07d0844cbf6501d8ca8e0ed, type: 3}
+      propertyPath: jumpableGround.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 3023449477298420395, guid: c79c792eb07d0844cbf6501d8ca8e0ed, type: 3}
       propertyPath: m_Layer
