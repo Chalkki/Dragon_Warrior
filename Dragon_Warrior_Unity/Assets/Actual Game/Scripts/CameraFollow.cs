@@ -17,6 +17,7 @@ public class CameraFollow : MonoBehaviour
     {
         if(!player) { return; }
         tempPos = player.position;
+        tempPos.y += 2.2f;
         tempPos.z = -10;
         transform.position = tempPos;
     }

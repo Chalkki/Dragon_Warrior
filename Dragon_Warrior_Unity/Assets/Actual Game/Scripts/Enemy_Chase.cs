@@ -23,6 +23,7 @@ public class Enemy_Chase : MonoBehaviour
     private Animator animator;
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         chaseSpeed = GetComponent<Enemy_Patrol>().patrolSpeed * 2;
         rb = GetComponent<Rigidbody2D>();
         facingRight = GetComponent<Enemy_Patrol>().facingRight;

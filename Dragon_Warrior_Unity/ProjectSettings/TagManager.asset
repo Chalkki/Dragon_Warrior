@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Ladder
   - Enemy
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Enemy
   - Player
   - Terrain
-  - 
+  - Breakable
   - 
   - 
   - 
@@ -46,6 +47,12 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 3489871681
+    locked: 0
+  - name: Building
+    uniqueID: 1474829905
+    locked: 0
+  - name: NPC
+    uniqueID: 3022584455
     locked: 0
   - name: Ladder
     uniqueID: 458852533

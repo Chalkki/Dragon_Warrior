@@ -11,10 +11,10 @@ public class Player : MonoBehaviour
     private float
         moveForce,
         jumpForce,
-        rollForce,
+        rollForce;
         // damage reaction
-        repelForceX = 10f,
-        repelForceY = 10f;
+/*        repelForceX = 10f,
+        repelForceY = 10f;*/
     [SerializeField]
     private bool
         facingRight = true;
@@ -41,6 +41,13 @@ public class Player : MonoBehaviour
     // layermask for ground jumping only
     [SerializeField]
     private LayerMask jumpableGround;
+    // the time that allowed player to press before touching the ground
+    private float jumpPressedTime = 0.2f;
+    private float jumpPressed;
+    private float justLeaveGroundTime = 0.1f;
+    private float justLeaveGround;
+    private float jumpMultiplier = 1f;
+    private float PressingTime = 0f;
     // parameters for climbing
     public bool
         isLadder = false,
@@ -48,6 +55,7 @@ public class Player : MonoBehaviour
     private float
         vertical = 0f,
         climbSpeed = 5f;
+       
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -57,7 +65,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-    
+        jumpPressed = 0f;
+        justLeaveGround = 0f;
     }
 
     // Update is called once per frame
@@ -68,14 +77,31 @@ public class Player : MonoBehaviour
             return;
         }
         PlayerMoveKeyboard();
-
         if (Input.GetKeyDown(KeyCode.LeftShift) && canRoll)
         {
             StartCoroutine(PlayerRoll());
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        // give the player a time gap to jump
+        jumpPressed -= Time.deltaTime;
+        justLeaveGround -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            jumpPressed = jumpPressedTime;
+        }
+        if (IsGrounded())
+        {
+            justLeaveGround = justLeaveGroundTime;
+            if(jumpPressed > 0f)
+            {
+                jumpPressed = 0f;
+                PlayerJump();
+            }
+        }
+        if (jumpPressed> 0f && justLeaveGround > 0f)
+        {
+            jumpPressed = 0f;
+            justLeaveGround = 0f;
             PlayerJump();
         }
 
@@ -118,7 +144,7 @@ public class Player : MonoBehaviour
             if (!facingRight)
             {
                 facingRight = true;
-                sprite.flipX = false;
+                transform.Rotate(0f, 180f, 0f);
             }
         }else if (movementX < 0)
         {
@@ -127,7 +153,7 @@ public class Player : MonoBehaviour
             if (facingRight)
             {
                 facingRight = false;
-                sprite.flipX = true;
+                transform.Rotate(0f, 180f, 0f);
             }
         }
         else
@@ -151,7 +177,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+/*        if (collision.gameObject.CompareTag("Enemy"))
         {
 
             //Vector2 repelForceDirection = coll.bounds.center - collision.collider.bounds.center;
@@ -174,7 +200,7 @@ public class Player : MonoBehaviour
 
             Debug.Log(myBody.velocity);
             
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

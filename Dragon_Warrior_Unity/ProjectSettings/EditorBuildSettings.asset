@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GamePlay.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Actual Game/Scenes/MainMenu.unity
+    guid: 09b184f7e89083c41a835cade49bcac4
+  - enabled: 1
+    path: Assets/Actual Game/Scenes/Forest/Village.unity
+    guid: aadedcc171baf8e48b457ad270d591ea
+  - enabled: 1
+    path: Assets/Actual Game/Scenes/Forest/Forest_1.unity
+    guid: b88d2572900449f4083ae7c7af98677a
+  - enabled: 1
+    path: Assets/Actual Game/Scenes/new_bee_valley.unity
+    guid: 7e721adad9eec443192698d06c620890
   m_configObjects: {}

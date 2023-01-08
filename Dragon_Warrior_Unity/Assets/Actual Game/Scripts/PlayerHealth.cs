@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void SetMaxHealth(float health)
     {
-        slider.maxValue = health;
+        slider.maxValue = health; 
         slider.value = health;
     }
     public void TakeDamage(float damage)

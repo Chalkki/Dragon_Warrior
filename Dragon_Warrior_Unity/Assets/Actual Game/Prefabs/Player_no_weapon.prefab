@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5802222045987664123}
   - component: {fileID: 5802222045987664120}
   - component: {fileID: 1940251594584366659}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_no_weapon
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -124,6 +124,8 @@ MonoBehaviour:
   moveForce: 10
   jumpForce: 5
   rollForce: 15
+  isLadder: 0
+  isClimbing: 0
 --- !u!95 &5802222045987664120
 Animator:
   serializedVersion: 4

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1925156478}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3821883895191879106}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,21 +73,25 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ebd153929e1edd74abfa8235c712836b, type: 2}
+    - target: {fileID: 5802222045987664123, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
+      propertyPath: jumpableGround.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.45
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: -3.18
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -95,15 +99,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664124, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -119,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664126, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_Name
-      value: Player_sword
+      value: PlayerSword
       objectReference: {fileID: 0}
     - target: {fileID: 5802222045987664127, guid: 3c24e6e27aeee68458810430e3ae1fb5, type: 3}
       propertyPath: m_Sprite
@@ -156,3 +160,17 @@ MonoBehaviour:
     m_Bits: 64
   playerDamage: 20
   attackRate: 2
+--- !u!114 &1981888292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635484815045275650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a8194154bb4444a8ce903a1cbdaa58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  slider: {fileID: 0}

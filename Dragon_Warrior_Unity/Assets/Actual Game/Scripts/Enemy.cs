@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 100;
     private Animator animator;
-    int currentHealth;
+    float currentHealth;
     public bool canFly = false;
     GameObject player;
     Rigidbody2D rb;
@@ -57,13 +57,16 @@ public class Enemy : MonoBehaviour
     {
         isAttacking = false;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage, bool attackFromLeft, float impulse)
     {
         // return if the current object is already dead
         if (currentHealth <= 0)
         {
             return;
         }
+        // let the enemy being stopped first
+        Vector2 orginalv = rb.velocity;
+        StartCoroutine(AttackImpulse(attackFromLeft,orginalv, impulse));
         currentHealth -= damage;
         GetComponent<Enemy_Chase>().Being_attacked();
         if (currentHealth <= 0)
@@ -72,6 +75,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    IEnumerator AttackImpulse(bool attackFromLeft, Vector2 originalv, float impulse)
+    {
+        if (attackFromLeft)
+        {
+            rb.velocity = new Vector2(-impulse,rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(-impulse, rb.velocity.y);
+        }
+        yield return new WaitForSeconds(0.5f);
+        rb.velocity = originalv;
+    }
     void Attack()
     {
         // return if the current object is already dead

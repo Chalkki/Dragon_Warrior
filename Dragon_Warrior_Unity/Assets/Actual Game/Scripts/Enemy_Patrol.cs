@@ -22,7 +22,7 @@ public class Enemy_Patrol : MonoBehaviour
         //baseScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        is_chasing = GetComponent<Enemy_Chase>().is_chasing;
+        is_chasing = false;
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class Enemy_Patrol : MonoBehaviour
         {
             return;
         }
-        
+
         // detect whether the enemy spotted the player and try to chase the player
         if (is_chasing)
         {
@@ -85,11 +85,11 @@ public class Enemy_Patrol : MonoBehaviour
         if (Physics2D.Linecast(castTrans.position, targetPos, 1 << LayerMask.NameToLayer("Terrain")))
         {
             hit = true;
+            return hit;
         }
 
         // Check if hitting edge
         targetPos = castTrans.position;
-        // let the enemy to patrol deeper in height
         targetPos.y = targetPos.y - baseCastDist;
         if (Physics2D.Linecast(castTrans.position, targetPos, 1 << LayerMask.NameToLayer("Terrain")))
         {
