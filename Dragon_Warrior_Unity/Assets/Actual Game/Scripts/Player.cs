@@ -11,10 +11,10 @@ public class Player : MonoBehaviour
     private float
         moveForce,
         jumpForce,
-        rollForce;
-        // damage reaction
-/*        repelForceX = 10f,
-        repelForceY = 10f;*/
+        rollForce,
+    // damage reaction
+        repelForceX ,
+        repelForceY;
     [SerializeField]
     private bool
         facingRight = true;
@@ -46,8 +46,9 @@ public class Player : MonoBehaviour
     private float jumpPressed;
     private float justLeaveGroundTime = 0.1f;
     private float justLeaveGround;
-    private float jumpMultiplier = 1f;
-    private float PressingTime = 0f;
+    private bool isJumping = false;
+    private float jumpTimeCounter;
+    public float maxJumpTime;
     // parameters for climbing
     public bool
         isLadder = false,
@@ -96,6 +97,8 @@ public class Player : MonoBehaviour
             {
                 jumpPressed = 0f;
                 PlayerJump();
+                isJumping = true;
+                jumpTimeCounter = maxJumpTime;
             }
         }
         if (jumpPressed> 0f && justLeaveGround > 0f)
@@ -103,8 +106,24 @@ public class Player : MonoBehaviour
             jumpPressed = 0f;
             justLeaveGround = 0f;
             PlayerJump();
+            isJumping = true;
+            jumpTimeCounter = maxJumpTime;
+        }
+        // let the player to hold for some time for a higher jump
+
+        if(Input.GetKey(KeyCode.Space) && isJumping)
+        {
+            jumpTimeCounter -= Time.deltaTime;
+            if(jumpTimeCounter > 0f)
+            {
+                PlayerJump();
+            }
         }
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumping = false;
+        }
         // check the player climbing the ladder
         vertical = Input.GetAxis("Vertical");
         if (isLadder && vertical != 0f)
@@ -166,7 +185,6 @@ public class Player : MonoBehaviour
     void PlayerJump()
     {
         myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
-        anim.SetTrigger(Jump_Anim);
         
     }
 
@@ -177,7 +195,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-/*        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
 
             //Vector2 repelForceDirection = coll.bounds.center - collision.collider.bounds.center;
@@ -191,16 +209,18 @@ public class Player : MonoBehaviour
             //    // repel right
             //myBody.AddForce(new Vector2(repelForceX, repelForceY), ForceMode2D.Force);
             //}
+            float repel_direc_x = Mathf.Sign(transform.position.x - collision.gameObject.transform.position.x);
+            float repel_direc_y = Mathf.Sign(transform.position.y - collision.gameObject.transform.position.y);
             if (myBody.bodyType == RigidbodyType2D.Dynamic)
             {
-                myBody.AddForce(new Vector2(repelForceX, repelForceY), ForceMode2D.Impulse);
+                myBody.AddForce(new Vector2(repel_direc_x * repelForceX, repel_direc_y * repelForceY), ForceMode2D.Impulse);
             }
-            
+
             //myBody.velocity = new Vector2(repelForceX, repelForceY);
 
             Debug.Log(myBody.velocity);
-            
-        }*/
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
