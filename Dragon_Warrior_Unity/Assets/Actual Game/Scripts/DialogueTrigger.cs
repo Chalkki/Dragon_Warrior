@@ -20,11 +20,14 @@ public class DialogueTrigger : MonoBehaviour
             }
         }
 
-        if (!isPlayerClose && isTalking)
+        if (!isPlayerClose)
         {
             transform.Find("interaction_text").gameObject.SetActive(false);
-            isTalking = false;
-            FindObjectOfType<DialogueManager>().EndOfDialogue();
+            if (isTalking)
+            {
+                isTalking = false;
+                FindObjectOfType<DialogueManager>().EndOfDialogue();
+            }
         }
     }
 
