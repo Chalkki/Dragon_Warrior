@@ -13,14 +13,14 @@ public class DialogueTrigger : MonoBehaviour
         if (isPlayerClose)
         {
             transform.Find("interaction_text").gameObject.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.E) && !isTalking)
+            if (Input.GetKeyDown(KeyCode.E) && !isTalking)
             {
                 isTalking = true;
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
         }
 
-        if (!isPlayerClose)
+        if (!isPlayerClose && isTalking)
         {
             transform.Find("interaction_text").gameObject.SetActive(false);
             isTalking = false;

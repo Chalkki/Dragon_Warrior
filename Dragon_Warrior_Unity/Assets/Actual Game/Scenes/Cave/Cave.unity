@@ -23438,6 +23438,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7253087875706147621, guid: 0bd14a3fb938ce84580ce7b4f3e82314, type: 3}
+      propertyPath: m_Name
+      value: DialoguePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253087875706147621, guid: 0bd14a3fb938ce84580ce7b4f3e82314, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253087876309580868, guid: 0bd14a3fb938ce84580ce7b4f3e82314, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 314369741}
     - target: {fileID: 7680311731951552978, guid: 0bd14a3fb938ce84580ce7b4f3e82314, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.71
@@ -25138,7 +25150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930129115}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c90f132b97c92324d853e4e67be6e5bc, type: 3}
   m_Name: 
