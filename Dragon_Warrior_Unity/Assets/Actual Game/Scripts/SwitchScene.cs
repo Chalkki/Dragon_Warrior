@@ -27,7 +27,7 @@ public class SwitchScene : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.E))
             {
                 leftToRight = goingRight;
-                if(!nextSceneName.Equals("Village"))
+                if(!nextSceneName.Equals("Village") && !nextSceneName.Equals("Cave"))
                 {
                     DontDestroyOnLoad(doNotDesotry);
                 }
