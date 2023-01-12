@@ -10,6 +10,28 @@ public class Inventory
     {
         itemList = new List<Item>();
 
-        Debug.Log("new inventory");
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1});
+        AddItem(new Item { itemType = Item.ItemType.Sword, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+
+        Debug.Log(itemList.Count);
+    }
+
+    public void AddItem(Item item)
+    {
+        itemList.Add(item);
+    }
+
+    public List<Item> GetItemList()
+    {
+        return itemList;
     }
 }

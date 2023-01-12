@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D myBody;
     private CapsuleCollider2D coll;
     private SpriteRenderer sprite;
+    private Inventory inventory;
 
     //animator parameter
     private string
@@ -41,6 +42,10 @@ public class Player : MonoBehaviour
     // layermask for ground jumping only
     [SerializeField]
     private LayerMask jumpableGround;
+    // inventory
+    [SerializeField]
+    private
+        UI_Inventory uiInventory;
     // the time that allowed player to press before touching the ground
     private float jumpPressedTime = 0.2f;
     private float jumpPressed;
@@ -68,6 +73,9 @@ public class Player : MonoBehaviour
     {
         jumpPressed = 0f;
         justLeaveGround = 0f;
+
+        inventory = new Inventory();
+        uiInventory.SetInventory(inventory);
     }
 
     // Update is called once per frame
