@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using CodeMonkey.Utils;
 
 public class ItemWorld : MonoBehaviour
 {
@@ -13,6 +14,17 @@ public class ItemWorld : MonoBehaviour
         itemWorld.SetItem(item);
 
         return itemWorld;
+    }
+
+    public static ItemWorld DropItem(Vector3 dropPosition ,Item item)
+    {
+        //Vector3 randomDir = new Vector3(UtilsClass.GetRandomDir().x, UtilsClass.GetRandomDir().y, 1);
+        Vector3 randomDir = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(0f, 1f)).normalized;
+        Debug.Log(randomDir);
+        ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * 3f, item);
+        itemWorld.GetComponent<Rigidbody2D>().AddForce(randomDir * 3f, ForceMode2D.Impulse);
+        return itemWorld;
+
     }
 
     private Item item;

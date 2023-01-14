@@ -61,6 +61,8 @@ public class Player : MonoBehaviour
     private float
         vertical = 0f,
         climbSpeed = 5f;
+    // parameters for inventory
+    private bool isInventoryOpen = false;
        
     private void Awake()
     {
@@ -74,8 +76,10 @@ public class Player : MonoBehaviour
         jumpPressed = 0f;
         justLeaveGround = 0f;
 
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
         uiInventory.SetInventory(inventory);
+        uiInventory.SetPlayer(this);
+        uiInventory.CloseInventory();
 
     }
 
@@ -90,6 +94,22 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && canRoll)
         {
             StartCoroutine(PlayerRoll());
+        }
+
+        // open/close inventory
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!isInventoryOpen)
+            {
+                uiInventory.OpenInventory();
+                isInventoryOpen = true;
+            }
+            else
+            {
+                uiInventory.CloseInventory();
+                isInventoryOpen = false;
+            }
+            
         }
 
         // give the player a time gap to jump
@@ -197,6 +217,22 @@ public class Player : MonoBehaviour
         
     }
 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                StartCoroutine(FlashGreen());
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+                break;
+        }
+    }
+
     private bool IsGrounded()
     {
         return Physics2D.CapsuleCast(coll.bounds.center, coll.bounds.size, CapsuleDirection2D.Vertical, 0f, Vector2.down, .1f, jumpableGround); 
@@ -276,6 +312,16 @@ public class Player : MonoBehaviour
         isRolling = false;
         yield return new WaitForSeconds(rollCooldown);
         canRoll = true;
+    }
+
+    private IEnumerator FlashGreen()
+    {
+        // Flash Green on sprite
+
+        Color normalColor = sprite.color;
+        sprite.color = new SpriteColorEffect { effectType = SpriteColorEffect.EffectType.HealEffect}.GetColor();
+        yield return new WaitForSeconds(.2f);
+        sprite.color = normalColor;
     }
 
 }
