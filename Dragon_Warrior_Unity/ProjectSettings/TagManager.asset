@@ -8,6 +8,7 @@ TagManager:
   - Ladder
   - Enemy
   - NPC
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -59,6 +60,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 3296067081
+    locked: 0
+  - name: Item
+    uniqueID: 3001830111
     locked: 0
   - name: Default
     uniqueID: 0

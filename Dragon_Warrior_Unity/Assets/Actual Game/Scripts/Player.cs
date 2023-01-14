@@ -76,6 +76,10 @@ public class Player : MonoBehaviour
 
         inventory = new Inventory();
         uiInventory.SetInventory(inventory);
+
+        ItemWorld.SpawnItemWorld(new Vector3(10, -1), new Item { itemType = Item.ItemType.Sword, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(9, -1), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(8, -1), new Item { itemType = Item.ItemType.Coin, amount = 1 });
     }
 
     // Update is called once per frame
@@ -236,6 +240,16 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ladder"))
         {
             isLadder = true;
+        }
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
+            if (itemWorld != null)
+            {
+                inventory.AddItem(itemWorld.GetItem());
+                itemWorld.DestroySelf();
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
