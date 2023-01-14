@@ -77,9 +77,6 @@ public class Player : MonoBehaviour
         inventory = new Inventory();
         uiInventory.SetInventory(inventory);
 
-        ItemWorld.SpawnItemWorld(new Vector3(10, -1), new Item { itemType = Item.ItemType.Sword, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(9, -1), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(8, -1), new Item { itemType = Item.ItemType.Coin, amount = 1 });
     }
 
     // Update is called once per frame
