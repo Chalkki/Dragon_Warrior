@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bee Controller
+  m_Controller: {fileID: 9100000, guid: 5cfd31e301e0797488c7ae347a846642, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0fb470ccb6b8395428b56fc21f8eed2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e6053840acc54e141bbc4d5314939527, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 07f94efc3c7e52944bc220e30148975d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0f8a7a05be531914da2c6cf56563c377, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c0a370d2a8f4b22489866696cc8d4b1b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 36ca72d6ec5aa3d4a96153bd4400c1ad, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9a1fd87769ecc2c44b8fd5664fe49857, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 09fda2ad846e3f940b4a881701706875, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ccee7de0301061548be1ec485a011653, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5fe224d563aeb9a4a9920d185516d842, type: 2}

@@ -12,8 +12,9 @@ public class Player_Sword_Attack : MonoBehaviour
     private float attackRange = 0.8f;
     [SerializeField]
     private LayerMask enemyLayers;
+    public LayerMask BreakableLayers;
     [SerializeField]
-    private int playerDamage = 20;
+    private float playerDamage = 20;
     //set up the attackRate
     [SerializeField]
     private float attackRate = 2f;
@@ -22,6 +23,9 @@ public class Player_Sword_Attack : MonoBehaviour
     public Slider energyBar;
     public float maxEnergy = 100f;
     public float currentEnergy;
+    // initialize the sword level
+    private int SwordLevel = 1;
+    private float DamageMultiplier = 1;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -84,7 +88,17 @@ public class Player_Sword_Attack : MonoBehaviour
             }
         }
     }
-    
+    public void SetSwordLevel(int level)
+    {
+        SwordLevel = level;
+        Debug.Log("The sword level is " + SwordLevel);
+        DamageMultiplier = Mathf.Pow(1.2f, SwordLevel - 1);
+    }
+
+    public int GetSwordLevel()
+    {
+        return SwordLevel;
+    }
     void setMaxEnergy(float energy)
     {
         //set max energy for slider
@@ -103,9 +117,8 @@ public class Player_Sword_Attack : MonoBehaviour
         attackRange = 0.8f;
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
         //Damage them
-        playerDamage = 20;
+        playerDamage = 20f * DamageMultiplier;
         // impulse that the enemy would have after being attacked
         float impulse = 2f;
         foreach (Collider2D enemy in hitEnemies)
@@ -120,38 +133,46 @@ public class Player_Sword_Attack : MonoBehaviour
             bool attackFromLeft = isAttackFromLeft(transform, enemy.transform);
             enemy.GetComponent<Enemy>().TakeDamage(playerDamage, attackFromLeft, impulse);
         }
+        hitBreakable();
     }
     void Attack2()
     {
         attackRange = 0.6f;
-        // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        //Damage them
-        playerDamage = 15;
+        playerDamage = 15 * DamageMultiplier;
         float impulse = 3f;
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            bool attackFromLeft = isAttackFromLeft(transform, enemy.transform);
-            enemy.GetComponent<Enemy>().TakeDamage(playerDamage, attackFromLeft, impulse);
-        }
+        hitBreakable();
+        hitEnemy(impulse);
+
     }
     void Attack3()
     {
-        // Detect enemies in range of attack
         // increase the attack range temporarily
         attackRange = 1.2f;
+        playerDamage = 50 * DamageMultiplier;
+        float impulse = 4f;
+        hitBreakable();
+        hitEnemy(impulse);
+    }
+
+    void hitEnemy(float impulse)
+    {
+        // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         //Damage them
-        playerDamage = 30;
-        float impulse = 4f;
         foreach (Collider2D enemy in hitEnemies)
         {
             bool attackFromLeft = isAttackFromLeft(transform, enemy.transform);
             enemy.GetComponent<Enemy>().TakeDamage(playerDamage, attackFromLeft, impulse);
         }
     }
-
+    void hitBreakable()
+    {
+        Collider2D[] hitBreakables = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, BreakableLayers);
+        foreach (Collider2D breakable in hitBreakables)
+        {
+            Destroy(breakable.gameObject);
+        }
+    }
     bool isAttackFromLeft(Transform player, Transform enemyTrans)
     {
         bool attackFromLeft;

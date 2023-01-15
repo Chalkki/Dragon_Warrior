@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class PlayerHealth : MonoBehaviour
     public Slider slider;
     float currentHealth;
     private Animator animator;
+    private Rigidbody2D rb;
+    private SpriteRenderer Srenderer;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         SetMaxHealth(maxHealth);
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        Srenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -39,6 +44,9 @@ public class PlayerHealth : MonoBehaviour
         {
             return;
         }
+        // change the color of the sprite
+        Color oldColor = Srenderer.color;
+        StartCoroutine(AttackResponse(oldColor));
         currentHealth -= damage;
         if(currentHealth <= 0) {
             SetHealth(0f);
@@ -48,6 +56,13 @@ public class PlayerHealth : MonoBehaviour
         SetHealth(currentHealth);
     }
 
+    IEnumerator AttackResponse(Color oldColor)
+    {
+        // change sprite color to red
+        Srenderer.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        Srenderer.color = oldColor;
+    }
     void Die()
     {
         animator.SetTrigger("is_dead");
@@ -56,5 +71,6 @@ public class PlayerHealth : MonoBehaviour
         {
             mono.enabled = false;
         }
+        Destroy(rb);
     }
 }

@@ -348,6 +348,8 @@ GameObject:
   - component: {fileID: 9069910519348580095}
   - component: {fileID: 9069910519348580094}
   - component: {fileID: 9069910519348580093}
+  - component: {fileID: 1591332740}
+  - component: {fileID: 519724304052570803}
   m_Layer: 0
   m_Name: BlackSmith
   m_TagString: NPC
@@ -481,10 +483,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90f132b97c92324d853e4e67be6e5bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: BlackSmith
-    sentences:
+  name: BlackSmith
+  icon: {fileID: 21300000, guid: e4b1f1757a702334693106e2e86e84ee, type: 3}
+  dialogueChoice:
+  - sentences:
     - Hey there, are you trying to upgrade your sword? I can forge the greatest sword
       in the town.
     - Show me your sword, and I can give you a better one!
     - The better the sword, the higher price for me to upgrade it.
+  - sentences:
+    - Your sword is upgraded!
+--- !u!114 &1591332740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069910519348579842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655a0fd80c2798249a1fee820565318c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefabs:
+  - {fileID: 8726347075866807316, guid: 38273780ecba302459875d57565c949a, type: 3}
+  - {fileID: 3960367148971478129, guid: 2493fc8c6839dc44289399918e8306f7, type: 3}
+  panelToAttachButtonsTo: {fileID: 0}
+--- !u!114 &519724304052570803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069910519348579842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be0a147631c3d243a8908b75ea732b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

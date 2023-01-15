@@ -167,7 +167,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
@@ -189,8 +189,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0018175094, y: -0.1274137}
-  m_Size: {x: 1.9307095, y: 1.2002476}
+  m_Offset: {x: -0.017944833, y: -0.15112908}
+  m_Size: {x: 1.4959402, y: 0.9631041}
   m_Direction: 1
 --- !u!114 &6136803178715453131
 MonoBehaviour:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   canFly: 0
-  attackRange: 1
+  attackRange: 0.6
   isAttacking: 0
   attackDamage: 20
   playerLayer:

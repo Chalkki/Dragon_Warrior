@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Goblin Axe
+  m_Controller: {fileID: 9100000, guid: 5cfd31e301e0797488c7ae347a846642, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 9a1fd87769ecc2c44b8fd5664fe49857, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d20901c527e0c78418c914dfd6b6b03b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c0a370d2a8f4b22489866696cc8d4b1b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5045919c81598304fb7ac8c986bd2c36, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 07f94efc3c7e52944bc220e30148975d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1a2e387eb7c089e4f831ab5f605ce187, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0fb470ccb6b8395428b56fc21f8eed2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e0bd867ffb3ab3d40be61b40433600be, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ccee7de0301061548be1ec485a011653, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 07df9a9761925574c9cc534893de33aa, type: 2}

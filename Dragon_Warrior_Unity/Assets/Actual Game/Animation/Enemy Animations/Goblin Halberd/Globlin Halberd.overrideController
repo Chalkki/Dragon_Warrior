@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Globlin Halberd
+  m_Controller: {fileID: 9100000, guid: 5cfd31e301e0797488c7ae347a846642, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: c0a370d2a8f4b22489866696cc8d4b1b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 372d8166796718544981da1f07ab528f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9a1fd87769ecc2c44b8fd5664fe49857, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3cff77d4d2185f84188f4b54ee4b425f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ccee7de0301061548be1ec485a011653, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6d451cbb90cb2d848bf2ce2ff3a427f6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0fb470ccb6b8395428b56fc21f8eed2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: afe8a7ec4a440a842af443a40d4d967e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 07f94efc3c7e52944bc220e30148975d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4ca5ccedb9b00f541b99c2dae194f659, type: 2}

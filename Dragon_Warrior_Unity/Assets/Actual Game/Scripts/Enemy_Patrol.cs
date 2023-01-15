@@ -82,9 +82,10 @@ public class Enemy_Patrol : MonoBehaviour
         targetPos.x += castDist;
 
         Debug.DrawLine(castTrans.position, targetPos, Color.blue);
-        if (Physics2D.Linecast(castTrans.position, targetPos, 1 << LayerMask.NameToLayer("Terrain")))
+        if (Physics2D.Linecast(castTrans.position, targetPos, 1 << LayerMask.NameToLayer("Terrain")) || Physics2D.Linecast(castTrans.position, targetPos, 1 << LayerMask.NameToLayer("Breakable")))
         {
             hit = true;
+            Debug.Log("Hit wall");
             return hit;
         }
 
@@ -98,6 +99,7 @@ public class Enemy_Patrol : MonoBehaviour
         else
         {
             hit = true;
+            Debug.Log("Hit edge");
         }
         return hit;
     }
@@ -113,6 +115,7 @@ public class Enemy_Patrol : MonoBehaviour
         if (facingRight)
         {
             facingRight = false;
+            Debug.Log("facing left");
         }
         else
         {

@@ -7,9 +7,11 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     private Animator animator;
     float currentHealth;
-    public bool canFly = false;
-    GameObject player;
-    Rigidbody2D rb;
+    public bool canFly;
+    private GameObject player;
+    private Rigidbody2D rb;
+    // get the sprite renderer
+    private SpriteRenderer Srenderer;
     public float attackRange ;
     private float nextAttackTime = 0f;
     private float attackRate = 1f;
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
         animator= GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        Srenderer= GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -64,6 +67,9 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
+        // change the color of the sprite
+        Color oldColor = Srenderer.color;
+        StartCoroutine(AttackResponse(oldColor));
         // let the enemy being stopped first
         Vector2 orginalv = rb.velocity;
         StartCoroutine(AttackImpulse(attackFromLeft,orginalv, impulse));
@@ -75,6 +81,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    IEnumerator AttackResponse(Color oldColor)
+    {
+        // change sprite color to red
+        Srenderer.color= Color.red;
+        yield return new WaitForSeconds(0.5f);
+        Srenderer.color =oldColor;
+    }
+    
     IEnumerator AttackImpulse(bool attackFromLeft, Vector2 originalv, float impulse)
     {
         if (attackFromLeft)
@@ -106,8 +120,8 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy die and health is " + currentHealth);
         animator.SetTrigger("die");
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<Enemy_Patrol>().enabled = false;
         GetComponent<Enemy_Chase>().enabled = false;
         GetComponent<Enemy>().enabled = false;

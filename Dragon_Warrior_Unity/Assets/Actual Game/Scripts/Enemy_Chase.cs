@@ -33,11 +33,11 @@ public class Enemy_Chase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        facingRight = GetComponent<Enemy_Patrol>().facingRight;
     }
 
     private void FixedUpdate()
     {
+        facingRight = GetComponent<Enemy_Patrol>().facingRight;
         if (GetComponent<Enemy>().isAttacking)
         {
             return;

@@ -8,7 +8,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameText;
+    public GameObject ChoicePanel;
+    public GameObject ContinueButton;
     public Queue<string> sentences;
+    public Image Icon;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,16 +20,34 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        ContinueButton.SetActive(true);
         cleanDialogue();
         foreach(string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
         dialoguePanel.SetActive(true);
-        nameText.text = dialogue.name;
+
         nextLine();
     }
 
+    public void ShowInfo(string name, Sprite icon)
+    {
+        nameText.text = name;
+        this.Icon.sprite = icon;
+    }
+    public void ShowChoices()
+    {
+
+        dialoguePanel.SetActive(true);
+        ChoicePanel.SetActive(true);
+        ContinueButton.SetActive(false);
+    }
+    public void DisableChoices()
+    {
+        // Destory all the childeren(choice buttons) and disable the choice panel
+        ChoicePanel.SetActive(false);
+    }
     void cleanDialogue()
     {
         dialogueText.text = "";
@@ -38,7 +59,9 @@ public class DialogueManager : MonoBehaviour
     {
         if (sentences.Count == 0)
         {
-            EndOfDialogue();
+            // if the conversation is done, return back to the choice interface
+            cleanDialogue();
+            ShowChoices();
             return;
         }
         string sentence = sentences.Dequeue();
@@ -55,6 +78,12 @@ public class DialogueManager : MonoBehaviour
     }
     public void EndOfDialogue()
     {
+        cleanDialogue();
+        foreach (Transform button in ChoicePanel.transform)
+        {
+            Destroy(button.gameObject);
+        }
+        DisableChoices();
         dialoguePanel.SetActive(false);
     }
 }
