@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D myBody;
     private CapsuleCollider2D coll;
     private SpriteRenderer sprite;
-    private Inventory inventory;
+    
 
     //animator parameter
     private string
@@ -63,7 +63,8 @@ public class Player : MonoBehaviour
         climbSpeed = 5f;
     // parameters for inventory
     private bool isInventoryOpen = false;
-       
+    private Inventory inventory;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour
         uiInventory.SetInventory(inventory);
         uiInventory.SetPlayer(this);
         uiInventory.CloseInventory();
+        
 
     }
 
@@ -111,6 +113,7 @@ public class Player : MonoBehaviour
             }
             
         }
+
 
         // give the player a time gap to jump
         jumpPressed -= Time.deltaTime;
